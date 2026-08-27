@@ -452,10 +452,26 @@ application::RdmaMemoryRegion RdmaDeviceContext::RegisterRdmaMemoryRegionDmabufI
 // silent writes to the wrong address). hsa_amd_portable_export_dmabuf reports the
 // true byte offset, so prefer it and fall back to the hip path (offset 0, correct
 // only for whole-allocation exports) when HSA export is unavailable.
+//
+// Mapping type: the exported dma-buf is imported by the NIC's kernel driver,
+// which DMAs into GPU VRAM over PCIe peer-to-peer. The legacy
+// hsa_amd_portable_export_dmabuf is hardwired to HSA_AMD_DMABUF_MAPPING_TYPE_NONE,
+// which does not request the PCIe-P2P placement newer drivers need, so those
+// drivers cannot attach to the fd. hsa_amd_portable_export_dmabuf_v2 takes an
+// explicit mapping-type flag; pass HSA_AMD_DMABUF_MAPPING_TYPE_PCIE so the buffer
+// is exported for PCIe P2P. v2 returns HSA_STATUS_ERROR_NOT_SUPPORTED on GPUs
+// without large-BAR / CPU-GPU XGMI, so fall back to the legacy (NONE) export and
+// then the hip path.
 static int TryExportDmabufFd(void* ptr, size_t size, uint64_t* offset) {
   int fd = -1;
   uint64_t off = 0;
-  hsa_status_t hs = hsa_amd_portable_export_dmabuf(ptr, size, &fd, &off);
+  hsa_status_t hs = hsa_amd_portable_export_dmabuf_v2(ptr, size, &fd, &off,
+                                                      HSA_AMD_DMABUF_MAPPING_TYPE_PCIE);
+  if (hs != HSA_STATUS_SUCCESS || fd < 0) {
+    fd = -1;
+    off = 0;
+    hs = hsa_amd_portable_export_dmabuf(ptr, size, &fd, &off);
+  }
   if (hs == HSA_STATUS_SUCCESS && fd >= 0) {
     *offset = off;
     return fd;
