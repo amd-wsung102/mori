@@ -173,6 +173,8 @@ struct BnxtDvApi {
 // ============================================================================
 // IONIC direct-verbs function pointers
 // ============================================================================
+struct ionic_dmabuf_alloc_result;
+
 struct IonicDvApi {
   using get_ctx_t = int (*)(struct ionic_dv_ctx*, struct ibv_context*);
   using qp_get_udma_idx_t = uint8_t (*)(struct ibv_qp*);
@@ -183,6 +185,14 @@ struct IonicDvApi {
   using pd_set_udma_mask_t = int (*)(struct ibv_pd*, uint32_t);
   using create_cq_ex_t = struct ibv_cq_ex* (*)(struct ibv_context*, struct ibv_cq_init_attr_ex*,
                                                struct ionic_cq_init_attr_ex*);
+  // Spelled out rather than using ionic_dv.h's ionic_dmabuf_{alloc,free}_fn so
+  // this header stays independent of the vendor headers; ionic_dmabuf_alloc_result
+  // only ever appears behind a pointer, so the forward declaration above suffices.
+  using dmabuf_alloc_cb_t = int (*)(struct ibv_pd*, void*, size_t, uint64_t,
+                                    struct ionic_dmabuf_alloc_result*);
+  using dmabuf_free_cb_t = void (*)(struct ibv_pd*, void*, int, uint64_t, uint64_t);
+  using pd_set_dmabuf_alloc_t = int (*)(struct ibv_pd*, dmabuf_alloc_cb_t, dmabuf_free_cb_t,
+                                        void*);
 
   get_ctx_t get_ctx = nullptr;
   qp_get_udma_idx_t qp_get_udma_idx = nullptr;
@@ -192,6 +202,7 @@ struct IonicDvApi {
   pd_set_rqcmb_t pd_set_rqcmb = nullptr;
   pd_set_udma_mask_t pd_set_udma_mask = nullptr;
   create_cq_ex_t create_cq_ex = nullptr;
+  pd_set_dmabuf_alloc_t pd_set_dmabuf_alloc = nullptr;
 
   void* handle = nullptr;
 
@@ -207,8 +218,12 @@ struct IonicDvApi {
     pd_set_rqcmb = (pd_set_rqcmb_t)DvLoadSymbol(handle, "ionic_dv_pd_set_rqcmb");
     pd_set_udma_mask = (pd_set_udma_mask_t)DvLoadSymbol(handle, "ionic_dv_pd_set_udma_mask");
     create_cq_ex = (create_cq_ex_t)DvLoadSymbol(handle, "ionic_dv_create_cq_ex");
+    pd_set_dmabuf_alloc =
+        (pd_set_dmabuf_alloc_t)DvLoadSymbol(handle, "ionic_dv_pd_set_dmabuf_alloc");
 
-    // create_cq_ex is optional: nullptr means CCQE not supported by this driver version
+    // create_cq_ex is optional: nullptr means CCQE not supported by this driver version.
+    // pd_set_dmabuf_alloc is optional too: nullptr means this libionic cannot take
+    // descriptor rings as dma-buf, so the parent-domain VA allocator is used instead.
     return get_ctx && qp_get_udma_idx && get_cq && get_qp && pd_set_sqcmb && pd_set_rqcmb &&
            pd_set_udma_mask;
   }

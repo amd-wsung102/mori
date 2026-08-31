@@ -462,7 +462,7 @@ application::RdmaMemoryRegion RdmaDeviceContext::RegisterRdmaMemoryRegionDmabufI
 // is exported for PCIe P2P. v2 returns HSA_STATUS_ERROR_NOT_SUPPORTED on GPUs
 // without large-BAR / CPU-GPU XGMI, so fall back to the legacy (NONE) export and
 // then the hip path.
-static int TryExportDmabufFd(void* ptr, size_t size, uint64_t* offset) {
+int ExportGpuDmabufFd(void* ptr, size_t size, uint64_t* offset) {
   int fd = -1;
   uint64_t off = 0;
   hsa_status_t hs = hsa_amd_portable_export_dmabuf_v2(ptr, size, &fd, &off,
@@ -503,7 +503,7 @@ application::RdmaMemoryRegion RdmaDeviceContext::RegisterRdmaMemoryRegionAuto(vo
   auto tryPlain = [&]() -> ibv_mr* { return ibv_reg_mr(pd, ptr, size, effectiveAccessFlag); };
   auto tryDmabuf = [&]() -> ibv_mr* {
     uint64_t dmabufOffset = 0;
-    int dmabufFd = TryExportDmabufFd(ptr, size, &dmabufOffset);
+    int dmabufFd = ExportGpuDmabufFd(ptr, size, &dmabufOffset);
     if (dmabufFd < 0) return nullptr;
     ibv_mr* mr = ibv_reg_dmabuf_mr(pd, dmabufOffset, size, reinterpret_cast<uint64_t>(ptr),
                                    dmabufFd, effectiveAccessFlag);

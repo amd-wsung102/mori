@@ -36,6 +36,12 @@ extern "C" {
 struct ibv_cq;
 struct ibv_qp;
 
+// Not every rdma-core release enumerates ionic in <rdma/ib_user_ioctl_verbs.h>,
+// so define it here as upstream ionic_dv.h does.
+#ifndef RDMA_DRIVER_IONIC
+#define RDMA_DRIVER_IONIC 21
+#endif
+
 /** IONIC_PD_TAG - tag used for parent domain resource allocation. */
 #define IONIC_PD_TAG ((uint64_t)RDMA_DRIVER_IONIC << 32)
 #define IONIC_PD_TAG_CQ (IONIC_PD_TAG | 1)
@@ -84,6 +90,35 @@ struct ionic_dv_qp {
   struct ionic_dv_queue rq;
   struct ionic_dv_queue sq;
 };
+
+/**
+ * struct ionic_dmabuf_alloc_result - Result of a DMABUF ring allocation.
+ * @fd:		DMABUF file descriptor.
+ * @offset:	Byte offset within the DMABUF at which the ring starts.
+ * @ptr:	Optional CPU mapping of the ring.  If non-NULL, the provider
+ *		will use this address for ibv_post_send(), ibv_post_recv(), and
+ *		ibv_poll_cq().  If NULL, those functions must not be called.
+ */
+struct ionic_dmabuf_alloc_result {
+  int fd;
+  uint64_t offset;
+  void* ptr;
+};
+
+/**
+ * ionic_dmabuf_alloc_fn - Allocate a DMABUF on behalf of the provider.
+ *
+ * @resource_type - IONIC_PD_TAG_* identifying the buffer type.
+ *
+ * Return: 0 on success, errno on failure.
+ */
+typedef int ionic_dmabuf_alloc_fn(struct ibv_pd* pd, void* pd_context, size_t size,
+                                  uint64_t resource_type,
+                                  struct ionic_dmabuf_alloc_result* result);
+
+/** ionic_dmabuf_free_fn - Free a DMABUF allocated by ionic_dmabuf_alloc_fn. */
+typedef void ionic_dmabuf_free_fn(struct ibv_pd* pd, void* pd_context, int fd, uint64_t offset,
+                                  uint64_t resource_type);
 
 /** struct ionic_puec_route - Info needed to setup a PUEC plane route. */
 struct ionic_dv_puec_route {

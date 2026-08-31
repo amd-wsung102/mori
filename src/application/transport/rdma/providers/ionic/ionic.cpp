@@ -24,6 +24,7 @@
 
 #include <hip/hip_runtime_api.h>
 #include <infiniband/verbs.h>
+#include <unistd.h>
 
 #include <cctype>
 #include <cstdio>
@@ -37,6 +38,7 @@
 #include "mori/application/utils/check.hpp"
 #include "mori/application/utils/math.hpp"
 #include "mori/core/transport/rdma/providers/ionic/ionic_fw.h"
+#include "mori/utils/env_utils.hpp"
 #include "mori/utils/mori_log.hpp"
 
 namespace mori {
@@ -452,6 +454,84 @@ void* IonicDeviceContext::pd_alloc_device_uncached(struct ibv_pd* pd, void* pd_c
   return dev_ptr;
 }
 
+static const char* IonicPdTagName(uint64_t resource_type) {
+  switch (resource_type) {
+    case IONIC_PD_TAG_CQ:
+      return "CQ";
+    case IONIC_PD_TAG_SQ:
+      return "SQ";
+    case IONIC_PD_TAG_RQ:
+      return "RQ";
+    case IONIC_PD_TAG_RCQ:
+      return "RCQ";
+    default:
+      return "?";
+  }
+}
+
+int IonicDeviceContext::pd_alloc_dmabuf_ring(struct ibv_pd* pd, void* pd_context, size_t size,
+                                             uint64_t resource_type,
+                                             struct ionic_dmabuf_alloc_result* result) {
+  auto* self = static_cast<IonicDeviceContext*>(pd_context);
+  if (self == nullptr || result == nullptr) return EINVAL;
+
+  // Same backing memory as the VA allocator: uncached device memory, which the
+  // GPU reaches directly and the host can still touch to post WQEs.
+  void* dev_ptr{nullptr};
+  hipError_t err =
+      hipExtMallocWithFlags(reinterpret_cast<void**>(&dev_ptr), size, hipDeviceMallocUncached);
+  if (err != hipSuccess || dev_ptr == nullptr) {
+    MORI_APP_ERROR("ionic dmabuf ring alloc: hipExtMallocWithFlags({}) failed for {}: {}", size,
+                   IonicPdTagName(resource_type), hipGetErrorString(err));
+    return ENOMEM;
+  }
+  memset(dev_ptr, 0, size);
+
+  uint64_t offset = 0;
+  int fd = ExportGpuDmabufFd(dev_ptr, size, &offset);
+  if (fd < 0) {
+    MORI_APP_ERROR("ionic dmabuf ring alloc: dma-buf export failed for {} (size {})",
+                   IonicPdTagName(resource_type), size);
+    (void)hipFree(dev_ptr);
+    return ENOTSUP;
+  }
+
+  result->fd = fd;
+  result->offset = offset;
+  // Non-NULL ptr lets the provider keep using ibv_post_send/recv and poll_cq.
+  result->ptr = dev_ptr;
+
+  {
+    std::lock_guard<std::mutex> lock(self->dmabufRingMutex);
+    self->dmabufRings[fd] = DmabufRing{dev_ptr, size};
+  }
+
+  MORI_APP_TRACE("ionic dmabuf ring alloc: {} size={} fd={} offset={} va={}",
+                 IonicPdTagName(resource_type), size, fd, offset, dev_ptr);
+  return 0;
+}
+
+void IonicDeviceContext::pd_free_dmabuf_ring(struct ibv_pd* pd, void* pd_context, int fd,
+                                             uint64_t offset, uint64_t resource_type) {
+  auto* self = static_cast<IonicDeviceContext*>(pd_context);
+  void* dev_ptr{nullptr};
+  if (self != nullptr) {
+    std::lock_guard<std::mutex> lock(self->dmabufRingMutex);
+    auto it = self->dmabufRings.find(fd);
+    if (it != self->dmabufRings.end()) {
+      dev_ptr = it->second.ptr;
+      self->dmabufRings.erase(it);
+    }
+  }
+  if (dev_ptr == nullptr) {
+    MORI_APP_WARN("ionic dmabuf ring free: unknown fd={} ({})", fd,
+                  IonicPdTagName(resource_type));
+  }
+  // The fd was created by our export, so closing it is ours to do.
+  if (fd >= 0) close(fd);
+  if (dev_ptr != nullptr) (void)hipFree(dev_ptr);
+}
+
 void IonicDeviceContext::create_parent_domain(ibv_context* context, struct ibv_pd* pd_orig) {
   struct ibv_parent_domain_init_attr pattr;
 
@@ -468,6 +548,14 @@ void IonicDeviceContext::create_parent_domain(ibv_context* context, struct ibv_p
   IonicDvApi::Instance().pd_set_sqcmb(pd_parent, false, false, false);
   IonicDvApi::Instance().pd_set_rqcmb(pd_parent, false, false, false);
 #endif
+  // Descriptor rings go through the dma-buf allocator when libionic offers it,
+  // so the NIC imports them as dma-buf instead of taking a bare VA. Older
+  // libionic has no such entry point; there the VA allocator above is used.
+  // MORI_DISABLE_IONIC_DMABUF_RING=1 forces the VA path for A/B comparison.
+  auto* setDmabufAlloc = IonicDvApi::Instance().pd_set_dmabuf_alloc;
+  const bool dmabufRingDisabled = env::IsEnvVarEnabled("MORI_DISABLE_IONIC_DMABUF_RING");
+  const bool useDmabufRing = (setDmabufAlloc != nullptr) && !dmabufRingDisabled;
+
   for (int i = 0; i < 2; i++) {
     pd_uxdma[i] = ibv_alloc_parent_domain(context, &pattr);
     assert(pd_uxdma[i]);
@@ -475,7 +563,20 @@ void IonicDeviceContext::create_parent_domain(ibv_context* context, struct ibv_p
     IonicDvApi::Instance().pd_set_sqcmb(pd_uxdma[i], false, false, false);
     IonicDvApi::Instance().pd_set_rqcmb(pd_uxdma[i], false, false, false);
     IonicDvApi::Instance().pd_set_udma_mask(pd_uxdma[i], 1u << i);
+    if (useDmabufRing) {
+      int rc = setDmabufAlloc(pd_uxdma[i], IonicDeviceContext::pd_alloc_dmabuf_ring,
+                              IonicDeviceContext::pd_free_dmabuf_ring, this);
+      if (rc != 0) {
+        MORI_APP_ERROR("ionic_dv_pd_set_dmabuf_alloc failed on pd_uxdma[{}]: {}", i, rc);
+      }
+    }
   }
+
+  MORI_APP_INFO("IONIC descriptor rings: {}",
+                useDmabufRing ? "dma-buf (ionic_dv_pd_set_dmabuf_alloc)"
+                              : (setDmabufAlloc == nullptr
+                                     ? "VA (libionic has no dma-buf ring support)"
+                                     : "VA (disabled via MORI_DISABLE_IONIC_DMABUF_RING)"));
 }
 
 IonicDeviceContext::IonicDeviceContext(RdmaDevice* rdma_device, ibv_context* context, ibv_pd* in_pd)

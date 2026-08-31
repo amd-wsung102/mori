@@ -25,6 +25,9 @@
 #include <hsa/hsa.h>
 #include <hsa/hsa_ext_amd.h>
 
+#include <mutex>
+#include <unordered_map>
+
 #include "mori/application/transport/rdma/providers/dv_loader.hpp"
 #include "mori/application/transport/rdma/providers/ionic/ionic_dv.h"
 #include "mori/application/transport/rdma/rdma.hpp"
@@ -151,11 +154,28 @@ class IonicDeviceContext : public RdmaDeviceContext {
   static void pd_release(ibv_pd* pd, void* pd_context, void* ptr, uint64_t resource_type);
   static void* pd_alloc_device_uncached(ibv_pd* pd, void* pd_context, size_t size, size_t alignment,
                                         uint64_t resource_type);
+  // Descriptor-ring allocators for libionic's dma-buf path. The provider calls
+  // these instead of pd_alloc_device_uncached when the pd has them registered,
+  // and imports the ring as a dma-buf rather than trusting a bare VA.
+  static int pd_alloc_dmabuf_ring(ibv_pd* pd, void* pd_context, size_t size,
+                                  uint64_t resource_type,
+                                  struct ionic_dmabuf_alloc_result* result);
+  static void pd_free_dmabuf_ring(ibv_pd* pd, void* pd_context, int fd, uint64_t offset,
+                                  uint64_t resource_type);
   void create_parent_domain(ibv_context* context, struct ibv_pd* pd_orig);
 
  private:
   uint32_t pdn;
   struct ibv_pd* pd_uxdma[2];
+
+  // Rings handed to the provider through pd_alloc_dmabuf_ring, keyed by the
+  // exported fd so pd_free_dmabuf_ring can release the backing allocation.
+  struct DmabufRing {
+    void* ptr;
+    size_t size;
+  };
+  std::mutex dmabufRingMutex;
+  std::unordered_map<int, DmabufRing> dmabufRings;
 
   std::unordered_map<uint32_t, IonicCqContainer*> cqPool;
   std::unordered_map<uint32_t, IonicQpContainer*> qpPool;
