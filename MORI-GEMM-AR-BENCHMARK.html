@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MORI-IO Introduction &mdash; MORI development (78b7a5f) documentation</title>
+  <title>MORI GEMM + All-Reduce Benchmark &mdash; MORI development (78b7a5f) documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="MORI UMBP Single-Node Smoke Test" href="MORI-UMBP-SINGLE-NODE-GUIDE.html" />
-    <link rel="prev" title="MORI-IR Guide" href="MORI-IR-GUIDE.html" /> 
+    <link rel="next" title="MORI-IO Benchmark" href="MORI-IO-BENCHMARK.html" />
+    <link rel="prev" title="MORI-EP Benchmark" href="MORI-EP-BENCHMARK.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -79,7 +79,7 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guides</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="MORI-EP-GUIDE.html">MORI-EP User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="MORI-EP-GUIDE.html#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MORI-EP-GUIDE.html#quick-reference">Quick Reference</a></li>
@@ -218,16 +218,16 @@
 <li class="toctree-l2"><a class="reference internal" href="MORI-IR-GUIDE.html#known-limitations">Known Limitations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">MORI-IO Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#design-concepts">Design &amp; Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#workflow">Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-api-quick-reference">Python API Quick Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-basic-read-write">Example: Basic Read/Write</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#environment-configuration">Environment &amp; Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#profiling-mori-io-with-roctx-markers">Profiling MORI-IO with ROCTX Markers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#source-files">Source Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MORI-IO-GUIDE.html">MORI-IO Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#design-concepts">Design &amp; Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#workflow">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#python-api-quick-reference">Python API Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#example-basic-read-write">Example: Basic Read/Write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#environment-configuration">Environment &amp; Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#profiling-mori-io-with-roctx-markers">Profiling MORI-IO with ROCTX Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MORI-IO-GUIDE.html#source-files">Source Files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="MORI-UMBP-SINGLE-NODE-GUIDE.html">MORI UMBP Single-Node Smoke Test</a><ul>
@@ -267,7 +267,7 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Benchmarks</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="MORI-EP-BENCHMARK.html">MORI-EP Benchmark</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="MORI-EP-BENCHMARK.html#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MORI-EP-BENCHMARK.html#intra-node">Intra-node</a><ul>
@@ -291,17 +291,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html">MORI GEMM + All-Reduce Benchmark</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#table-of-contents">Table of Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#summary">Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#running-the-benchmark">Running the benchmark</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#modes-and-quantisation">Modes and quantisation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#the-fp8-wire-s-knobs">The fp8 wire’s knobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#the-gemm-on-its-own">The GEMM on its own</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MORI GEMM + All-Reduce Benchmark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-benchmark">Running the benchmark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modes-and-quantisation">Modes and quantisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-fp8-wire-s-knobs">The fp8 wire’s knobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-gemm-on-its-own">The GEMM on its own</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#measurement-discipline">Measurement discipline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MORI-GEMM-AR-BENCHMARK.html#reproducing-the-end-to-end-numbers">Reproducing the end-to-end numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measurement-discipline">Measurement discipline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reproducing-the-end-to-end-numbers">Reproducing the end-to-end numbers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="MORI-IO-BENCHMARK.html">MORI-IO Benchmark</a><ul>
@@ -513,9 +513,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">MORI-IO Introduction</li>
+      <li class="breadcrumb-item active">MORI GEMM + All-Reduce Benchmark</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/MORI-IO-GUIDE.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/MORI-GEMM-AR-BENCHMARK.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -523,379 +523,360 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mori-io-introduction">
-<h1>MORI-IO Introduction<a class="headerlink" href="#mori-io-introduction" title="Link to this heading"></a></h1>
-<p>MORI-IO is AMD’s point-to-point communication library that leverages GDR (GPU Direct RDMA) to achieve low-latency and high-bandwidth. Its current main use case is KVCache transfer in LLM inference.</p>
+  <section id="mori-gemm-all-reduce-benchmark">
+<h1>MORI GEMM + All-Reduce Benchmark<a class="headerlink" href="#mori-gemm-all-reduce-benchmark" title="Link to this heading"></a></h1>
+<p>How to run the benchmarks for <code class="docutils literal notranslate"><span class="pre">mori.ops.gemm_ar</span></code> – the fused fp8 GEMM +
+all-reduce, and the mxfp8 GEMM it is built on – and a summary of what they say.</p>
+<p>The design, the API and <strong>every full measurement table</strong> live next to the code in
+<a class="reference external" href="https://github.com/ROCm/mori/blob/main/python/mori/ops/gemm_ar/README.md"><code class="docutils literal notranslate"><span class="pre">python/mori/ops/gemm_ar/README.md</span></code></a>.
+This page is the entry point: how to reproduce, what the knobs mean, and the
+headline numbers.</p>
+<p>Everything here is <strong>MI355X (gfx950)</strong>, one node, otherwise idle, with occupancy
+recorded before and after each measurement. Kernel timings are the median over
+repeated iterations, maximum over ranks. Run-to-run spread is about <strong>2%</strong>, so
+differences below that are not differences.</p>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#design-concepts">Design &amp; Concepts</a></p></li>
-<li><p><a class="reference internal" href="#workflow">Workflow</a></p></li>
-<li><p><a class="reference internal" href="#architecture">Architecture</a></p></li>
-<li><p><a class="reference internal" href="#python-api-quick-reference">Python API Quick Reference</a></p></li>
-<li><p><a class="reference internal" href="#example-basic-read-write">Example: Basic Read/Write</a></p></li>
-<li><p><a class="reference internal" href="#environment-configuration">Environment &amp; Configuration</a></p></li>
-<li><p><a class="reference internal" href="#profiling-mori-io-with-roctx-markers">Profiling MORI-IO with ROCTX Markers</a></p></li>
-<li><p><a class="reference internal" href="#source-files">Source Files</a></p></li>
+<li><p><a class="reference internal" href="#summary">Summary</a></p></li>
+<li><p><a class="reference internal" href="#running-the-benchmark">Running the benchmark</a></p>
+<ul>
+<li><p><a class="reference internal" href="#modes-and-quantisation">Modes and quantisation</a></p></li>
+<li><p><a class="reference internal" href="#the-fp8-wire-s-knobs">The fp8 wire’s knobs</a></p></li>
+<li><p><a class="reference internal" href="#the-gemm-on-its-own">The GEMM on its own</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#measurement-discipline">Measurement discipline</a></p></li>
+<li><p><a class="reference internal" href="#reproducing-the-end-to-end-numbers">Reproducing the end-to-end numbers</a></p></li>
 </ul>
 </section>
-<section id="design-concepts">
-<h2>Design &amp; Concepts<a class="headerlink" href="#design-concepts" title="Link to this heading"></a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Two models are covered and <strong>they do not reach the same conclusion</strong>, so they
+are never averaged:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>DeepSeek-V4-Pro</p></th>
+<th class="head"><p>DeepSeek-V4.1-Flash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wo_b</span></code> per rank</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[M,</span> <span class="pre">7168]</span></code> K=2048, TP8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[M,</span> <span class="pre">5120]</span></code> K=2048, TP4</p></td>
+</tr>
+<tr class="row-odd"><td><p>quantisation</p></td>
+<td><p>1x128 / 128x128 fp8 block scale</p></td>
+<td><p>32-wide ue8m0 (mxfp8)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--quant</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">blockscale</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mxfp8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>best configuration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fused-sdma</span></code> + fp8 gather</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fused-sdma</span></code> + fp8 gather over LSA</p></td>
+</tr>
+<tr class="row-even"><td><p>at M=16384</p></td>
+<td><p><strong>979.3 us against 1472.9, -33%</strong></p></td>
+<td><p><strong>1192.1 us against 1592.5, -25%</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>what dominates it</p></td>
+<td><p>the overlap</p></td>
+<td><p>the fp8 wire, then the GEMM</p></td>
+</tr>
+<tr class="row-even"><td><p>vs the model as it ships</p></td>
+<td><p>1419.5 us -&gt; 979.3, <strong>-31%</strong></p></td>
+<td><p>see below</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>On V4.1-Flash most of the win is not the fusing.</strong> The GEMM is 178us against
+1414us of communication, so hiding it entirely would be worth 11-15% and fusing
+collects about half of that. The fp8 wire is worth -15.6% on its own and the
+mxfp8 GEMM another -30.3% against the route SGLang would otherwise take. Reading
+V4-Pro’s conclusion across would set every threshold wrong.</p>
+<p>The GEMM is also usable on its own, with no collective attached
+(<code class="docutils literal notranslate"><span class="pre">Mxfp8GemmOp</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mxfp8GemvOp</span></code> for decode’s token counts). Against SGLang’s
+native mxfp8 linear across all twelve of V4.1-Flash’s fp8 linear shapes, what
+decides the outcome is the grid, <code class="docutils literal notranslate"><span class="pre">ceildiv(M,256)</span> <span class="pre">*</span> <span class="pre">(N/256)</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>grid (workgroups)</p></th>
+<th class="head text-right"><p>median vs SGLang</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1-32</p></td>
+<td class="text-right"><p>+246.7%</p></td>
+</tr>
+<tr class="row-odd"><td><p>33-64</p></td>
+<td class="text-right"><p>-0.7%</p></td>
+</tr>
+<tr class="row-even"><td><p>65-128</p></td>
+<td class="text-right"><p><strong>-10.2%</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>129-256</p></td>
+<td class="text-right"><p><strong>-26.6%</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;256</p></td>
+<td class="text-right"><p><strong>-26.4%</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>End to end in a server, V4.1-Flash prefill throughput at batch sizes 4-16 is
+<strong>+5.6% to +6.0%</strong> on the fp8 wire, <strong>+2.2% to +2.5%</strong> from the standalone GEMM
+with nothing fused, and <strong>+7.4% to +7.7%</strong> with both enabled; V4-Pro is
+<strong>-5.0% GPU busy</strong> over a profiled prefill. Per-layer wins are larger than
+end-to-end ones because <code class="docutils literal notranslate"><span class="pre">wo_b</span></code> is about 12% of the profile, and the two
+SGLang-side results stack without adding – they split that layer by M rather
+than both working on it.</p>
+<blockquote>
+<div><p>One <code class="docutils literal notranslate"><span class="pre">both</span></code>-enabled server out of nine hit an illegal memory access under
+sustained load and has not reproduced. It is not established that the
+combination caused it; see
+<a class="reference external" href="https://github.com/ROCm/mori/blob/main/python/mori/ops/gemm_ar/README.md#end-to-end-in-sglang">the operator README</a>
+for what has been ruled out.</p>
+</div></blockquote>
+<p>Full tables, the numerical cost of the fp8 wire, the model-level quality
+evaluation, and the threshold derivations are in
+<a class="reference external" href="https://github.com/ROCm/mori/blob/main/python/mori/ops/gemm_ar/README.md#measured-results">the operator README</a>.</p>
+</section>
+<section id="running-the-benchmark">
+<h2>Running the benchmark<a class="headerlink" href="#running-the-benchmark" title="Link to this heading"></a></h2>
+<p>Needs a mori built with <code class="docutils literal notranslate"><span class="pre">BUILD_CCO_SDMA=ON</span></code>. Setting <code class="docutils literal notranslate"><span class="pre">MORI_ENABLE_SDMA</span></code> in the
+environment only rebuilds the <em>device</em> bitcode – a host library built without
+the flag has no SDMA queues, every put silently does nothing, and the all-reduce
+quietly produces zeros.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/mori
+<span class="nv">BUILD_CCO_SDMA</span><span class="o">=</span>ON<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.
+
+<span class="c1"># DeepSeek-V4-Pro, TP8</span>
+<span class="nv">MORI_ENABLE_SDMA</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MORI_SOCKET_IFNAME</span><span class="o">=</span>lo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>torchrun<span class="w"> </span>--standalone<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>benchmark/cco/flydsl/gemm_ar/bench_gemm_ar.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--mode<span class="w"> </span>fused-sdma<span class="w"> </span>--quant<span class="w"> </span>blockscale<span class="w"> </span>-m<span class="w"> </span><span class="m">16384</span><span class="w"> </span>-n<span class="w"> </span><span class="m">7168</span><span class="w"> </span>-k<span class="w"> </span><span class="m">2048</span>
+
+<span class="c1"># DeepSeek-V4.1-Flash, TP4, with the wire that wins there</span>
+<span class="nv">MORI_ENABLE_SDMA</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MORI_SOCKET_IFNAME</span><span class="o">=</span>lo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>torchrun<span class="w"> </span>--standalone<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>benchmark/cco/flydsl/gemm_ar/bench_gemm_ar.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--mode<span class="w"> </span>fused-sdma<span class="w"> </span>--quant<span class="w"> </span>mxfp8<span class="w"> </span>-m<span class="w"> </span><span class="m">16384</span><span class="w"> </span>-n<span class="w"> </span><span class="m">5120</span><span class="w"> </span>-k<span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--gather-dtype<span class="w"> </span>fp8<span class="w"> </span>--gather-transport<span class="w"> </span>lsa<span class="w"> </span>--no-fuse-quantize
+</pre></div>
+</div>
+<p>Each run prints a <code class="docutils literal notranslate"><span class="pre">RESULT_JSON</span></code> line with <code class="docutils literal notranslate"><span class="pre">max_rank_time_us</span></code>, <code class="docutils literal notranslate"><span class="pre">rel_l2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">validated</span></code>, so a sweep can be parsed rather than eyeballed.</p>
+<p>Matrices are presets of <code class="docutils literal notranslate"><span class="pre">sweep.py</span></code>, which runs one point per process, enforces
+the <code class="docutils literal notranslate"><span class="pre">BUILD_CCO_SDMA</span></code> guard, records occupancy either side, and <strong>exits non-zero
+with the count of failed points</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>benchmark/cco/flydsl/gemm_ar/sweep.py<span class="w"> </span>--list
+python<span class="w"> </span>benchmark/cco/flydsl/gemm_ar/sweep.py<span class="w"> </span>fused<span class="w">          </span><span class="c1"># the mode matrix</span>
+python<span class="w"> </span>benchmark/cco/flydsl/gemm_ar/sweep.py<span class="w"> </span>fused-wire<span class="w">     </span><span class="c1"># the fp8 leg's knobs</span>
+python<span class="w"> </span>benchmark/cco/flydsl/gemm_ar/report.py<span class="w"> </span>fused.jsonl
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">report.py</span></code> keys on every configuration field a row carries, so a matrix that
+varies <code class="docutils literal notranslate"><span class="pre">gather_transport</span></code> or <code class="docutils literal notranslate"><span class="pre">fuse_quantize</span></code> renders as separate tables rather
+than silently overwriting itself.</p>
+<p>Numerics:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MORI_ENABLE_SDMA</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MORI_SOCKET_IFNAME</span><span class="o">=</span>lo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pytest<span class="w"> </span>tests/python/cco/test_gemm_ar.py<span class="w"> </span>tests/python/cco/test_flydsl_ar.py<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>tests/python/cco/test_gemm_ar_op.py
+</pre></div>
+</div>
+<section id="modes-and-quantisation">
+<h3>Modes and quantisation<a class="headerlink" href="#modes-and-quantisation" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--mode</span></code> selects what is measured, all reaching the same end state:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>mode</p></th>
+<th class="head"><p>what runs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gemm-only</span></code></p></td>
+<td><p>the GEMM alone, to size the ceiling</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">split-sdma</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gemm</span></code> then a 4-kernel SDMA all-reduce</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fused-sdma</span></code></p></td>
+<td><p>GEMM with the scatter fused into its epilogue</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">split-lsa</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gemm</span></code> then the 2-kernel LSA all-reduce</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fused-lsa</span></code></p></td>
+<td><p>GEMM storing straight into peers</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">--quant</span></code> picks the operand contract, and it is per model – <code class="docutils literal notranslate"><span class="pre">blockscale</span></code> for
+V4-Pro (A 1x128, B 128x128, fp32 scales), <code class="docutils literal notranslate"><span class="pre">mxfp8</span></code> for V4.1-Flash (32-wide ue8m0
+on both, int32). Two more exist and are not for use: <code class="docutils literal notranslate"><span class="pre">mxfp8_unpacked</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mxfp8_row</span></code> are the scale layouts <code class="docutils literal notranslate"><span class="pre">mxfp8</span></code> was chosen over, kept so the choice
+stays measurable.</p>
+<blockquote>
+<div><p><strong>Pin <code class="docutils literal notranslate"><span class="pre">--quant</span></code> when comparing anything against anything.</strong> The benchmark
+defaults to <code class="docutils literal notranslate"><span class="pre">ptpc</span></code>, which is ~3% faster than <code class="docutils literal notranslate"><span class="pre">blockscale</span></code> and a different
+kernel again from <code class="docutils literal notranslate"><span class="pre">mxfp8</span></code>. Reading one against the other looks exactly like a
+machine that drifts overnight.</p>
+</div></blockquote>
+<p>mxfp8 compiles at <code class="docutils literal notranslate"><span class="pre">BLOCK_M=256</span></code> where blockscale needs 128, so M pads to a
+multiple of <code class="docutils literal notranslate"><span class="pre">world_size</span> <span class="pre">*</span> <span class="pre">256</span></code>. That is not a tuning choice – the packed scale
+puts a lane’s four M tiles in one dword, which is four tiles only at
+<code class="docutils literal notranslate"><span class="pre">BLOCK_M//64</span> <span class="pre">==</span> <span class="pre">4</span></code>.</p>
+</section>
+<section id="the-fp8-wire-s-knobs">
+<h3>The fp8 wire’s knobs<a class="headerlink" href="#the-fp8-wire-s-knobs" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--gather-dtype</span> <span class="pre">fp8</span></code> sends the all-gather leg as e4m3 with one fp32 scale per
+row. The reduce still accumulates in fp32 and the output is still bf16; only the
+wire changes. The scatter leg is unchanged – it carries partial sums that are
+then added across every rank, so its error would compound rather than being a
+single rounding.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>flag</p></th>
+<th class="head"><p>recommendation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--gather-transport</span> <span class="pre">{sdma,lsa}</span></code></p></td>
+<td><p><strong><code class="docutils literal notranslate"><span class="pre">lsa</span></code></strong>: CUs pull and widen on the way in, where SDMA has to land the fp8 and read it back out of local HBM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--no-fuse-quantize</span></code></p></td>
+<td><p><strong>on</strong>: folding the narrowing into the reduce costs 1-2%</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MORI_GEMM_AR_PULL_BLOCKS</span></code></p></td>
+<td><p><strong>48-80</strong>; these are xGMI reads, so the grid throttles outstanding remote requests rather than covering HBM latency</p></td>
+</tr>
+</tbody>
+</table>
+<p>The pull grid is the single most important tuning parameter and is not obvious
+from the source – the first implementation launched 512, the grid the local
+quantize kernel uses, and lost to SDMA by 17%. Sweep it with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>b<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">48</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="m">128</span><span class="w"> </span><span class="m">256</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nv">MORI_GEMM_AR_PULL_BLOCKS</span><span class="o">=</span><span class="nv">$b</span><span class="w"> </span><span class="nv">MORI_ENABLE_SDMA</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MORI_SOCKET_IFNAME</span><span class="o">=</span>lo<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>torchrun<span class="w"> </span>--standalone<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>benchmark/cco/flydsl/gemm_ar/bench_gemm_ar.py<span class="w"> </span>--mode<span class="w"> </span>fused-sdma<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--quant<span class="w"> </span>blockscale<span class="w"> </span>--gather-dtype<span class="w"> </span>fp8<span class="w"> </span>--gather-transport<span class="w"> </span>lsa<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-m<span class="w"> </span><span class="m">16384</span><span class="w"> </span>-n<span class="w"> </span><span class="m">7168</span><span class="w"> </span>-k<span class="w"> </span><span class="m">2048</span>
+<span class="w">  </span>sleep<span class="w"> </span><span class="m">10</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="the-gemm-on-its-own">
+<h3>The GEMM on its own<a class="headerlink" href="#the-gemm-on-its-own" title="Link to this heading"></a></h3>
+<p>Single process, no collective, so no <code class="docutils literal notranslate"><span class="pre">torchrun</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bench_gemm.py</span></code> covers both scopes, and they are different questions rather
+than two views of one. <code class="docutils literal notranslate"><span class="pre">--scope</span> <span class="pre">kernel</span></code> takes operands that are already
+quantised and already padded, which is what a tile or a scale layout is chosen
+on; <code class="docutils literal notranslate"><span class="pre">--scope</span> <span class="pre">linear</span></code> starts from bf16 and puts quantisation, padding and the
+op’s own tile dispatch inside the measurement, which is what a layer costs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">B</span><span class="o">=</span>benchmark/cco/flydsl/gemm_ar
+
+<span class="c1"># the multiply alone, either quantisation, any shape</span>
+python<span class="w"> </span><span class="nv">$B</span>/bench_gemm.py<span class="w"> </span>-n<span class="w"> </span><span class="m">5120</span><span class="w"> </span>-k<span class="w"> </span><span class="m">2048</span><span class="w"> </span>-m<span class="w"> </span><span class="m">4096</span><span class="w"> </span>--scope<span class="w"> </span>kernel<span class="w"> </span>--impl<span class="w"> </span>auto
+
+<span class="c1"># the layer, against SGLang. --impl gemm256,gemm128 pins mori's N tile so the</span>
+<span class="c1"># dispatch can be measured rather than trusted</span>
+python<span class="w"> </span><span class="nv">$B</span>/bench_gemm.py<span class="w"> </span>--shape<span class="w"> </span>wq_b<span class="w"> </span>-m<span class="w"> </span><span class="m">1024</span><span class="w"> </span>--scope<span class="w"> </span>linear<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--impl<span class="w"> </span>auto,gemm256,gemm128,sglang
+
+<span class="c1"># the skinny GEMM (M &lt;= 32); --baseline none drops the SGLang import entirely</span>
+python<span class="w"> </span><span class="nv">$B</span>/bench_gemv.py<span class="w"> </span>--shape<span class="w"> </span>wq_b<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span>--sweep
+</pre></div>
+</div>
+<p>The SGLang baseline is optional throughout – mori’s own numbers need nothing
+installed but mori – but <code class="docutils literal notranslate"><span class="pre">--scope</span> <span class="pre">linear</span></code> does need it, because the
+quantisation inside the measurement is SGLang’s quantiser.</p>
+<p>Comparing against SGLang’s own route needs its harness, which lives in the
+SGLang tree because the baseline does
+(<code class="docutils literal notranslate"><span class="pre">test/registered/perf/models/bench_mori_mxfp8_gemm.py</span></code>); it takes <code class="docutils literal notranslate"><span class="pre">-n</span></code>/<code class="docutils literal notranslate"><span class="pre">-k</span></code> for
+any shape, or a name for any of V4.1-Flash’s layers.</p>
+</section>
+</section>
+<section id="measurement-discipline">
+<h2>Measurement discipline<a class="headerlink" href="#measurement-discipline" title="Link to this heading"></a></h2>
+<p>These are the ones that have produced a confident wrong number here. The reasons
+are in
+<a class="reference external" href="https://github.com/ROCm/mori/blob/main/python/mori/ops/gemm_ar/README.md#measurement-traps">Measurement traps</a>.</p>
 <ul class="simple">
-<li><p><strong>IOEngine</strong>: The primary interface for interacting with MORI-IO. It abstracts low-level details of P2P communications and provides high-level APIs for engine registration, memory registration, P2P transfer, etc.</p></li>
-<li><p><strong>Backend</strong>: A backend represents and manages a specific transfer medium (e.g., RDMA, XGMI, TCP). It must be created before any data transfer can occur over that medium.</p></li>
-<li><p><strong>Engine Registration</strong>: Before two engines can communicate, the remote engine must be registered with the local engine. This establishes the necessary context for initiating data transfers between them.</p></li>
-<li><p><strong>Memory Registration</strong>: Application memory must be registered with a local engine before it can participate in data transfer. This ensures the engine can access and manage the memory efficiently during communication.</p></li>
-<li><p><strong>Read/Write</strong>: One-sided transfer operations initiated by the initiator engine without active involvement from the target engine. These operations can move data directly between registered memory regions.</p></li>
-<li><p><strong>Batch Read/Write</strong>: A batched form of one-sided operations, where multiple transfers are grouped and launched together. Batching reduces per-operation launch overhead and improves bandwidth utilization.</p></li>
-<li><p><strong>Session</strong>: A pre-established transfer context between a pair of MemoryDesc objects. Sessions eliminate repetitive overheads such as connection setup, metadata exchange, and resource management, providing a lightweight and efficient path for repeated transfers.</p></li>
+<li><p><strong>Amortise the capture.</strong> A single-call CUDA-graph replay has a <strong>13.40 us
+floor</strong> on this box, which is most of any small-M measurement. Use
+<code class="docutils literal notranslate"><span class="pre">benchmark/cco/flydsl/gemm_ar/timing.py</span></code>.</p></li>
+<li><p><strong>Report cold as well as hot.</strong> A repeated call reads the weight out of the
+256 MB LLC at 1.7x the bandwidth a forward pass gets. Cold is what predicts a
+server.</p></li>
+<li><p><strong>One M per process.</strong> A multi-M sweep once reported 697 us and 1083 us for
+two M that pad to the same size; isolated, both were 697.</p></li>
+<li><p><strong>Assert the fast path actually ran.</strong> A path that silently declined looks
+exactly like one that ran and was not worth it. Both integrations have a shape
+log for this (<code class="docutils literal notranslate"><span class="pre">SGLANG_OPT_FUSED_WO_B_AR_SHAPE_LOG=1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">SGLANG_OPT_MORI_MXFP8_GEMM_SHAPE_LOG=1</span></code>).</p></li>
+<li><p><strong>Check <code class="docutils literal notranslate"><span class="pre">BUILD_CCO_SDMA=ON</span></code> before believing any end-to-end number.</strong> With it
+off the fused path measures <em>faster</em> than it is, because it is not moving
+data.</p></li>
+<li><p><strong>Let the SDMA queues drain between runs.</strong> Back-to-back 8-rank runs hit
+<code class="docutils literal notranslate"><span class="pre">hsaKmtCreateQueueExt</span></code> failures (<code class="docutils literal notranslate"><span class="pre">anvil.cpp:237</span></code>) if a previous run’s ranks
+have not exited. ~10s is enough; a leftover server holding queues is not.</p></li>
 </ul>
 </section>
-<section id="workflow">
-<h2>Workflow<a class="headerlink" href="#workflow" title="Link to this heading"></a></h2>
-<p>The image below shows a typical workflow of using MORI-IO.</p>
-<img src="mori_io_workflow.jpg">
-</section>
-<section id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
-<p>From the application’s perspective, MORI-IO provides 3 kinds of functionalities: engine registration, memory registration, and transfers.</p>
-<p>The application is responsible for passing and registering engine descriptors among engines where transfers are expected to happen. Once engines are registered with each other, the application registers memory buffers on both initiator-side and target-side. Before initiating transfers from the initiator, the application needs to first pass the memory descriptors from the target side to the initiator side. After that, the application is ready to initiate transfers from the initiator engine. The transfer APIs return a <code class="docutils literal notranslate"><span class="pre">TransferStatus</span></code> that the application can use to query the state of corresponding transfers. Transfers are initiated asynchronously.</p>
-<p>Inside MORI-IO, there are 5 components:</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Component</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Slow Control Plane</strong></p></td>
-<td><p>Exchanges metadata such as memory descriptors, RDMA QP numbers, and custom notification messages. Uses a built-in TCP server with a lightweight protocol (no 3rd-party libraries).</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Fast Control Plane</strong></p></td>
-<td><p>Exchanges metadata on the critical path of transfers (e.g., remote engine completion notifications). Uses RDMA network to minimize performance penalty.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Data Plane</strong></p></td>
-<td><p>Transfers bulk data. Supported transports: RDMA, XGMI, TCP.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Metadata Store</strong></p></td>
-<td><p>Manages per-engine metadata. Each engine manages its own metadata (no centralized store).</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Transport Store</strong></p></td>
-<td><p>Manages multiple transfer backends (RDMA, TCP, XGMI). Provides failover if one backend is in a failure state.</p></td>
-</tr>
-</tbody>
-</table>
-<img src="mori_io_arch.png">
-</section>
-<section id="python-api-quick-reference">
-<h2>Python API Quick Reference<a class="headerlink" href="#python-api-quick-reference" title="Link to this heading"></a></h2>
-<p><strong>Imports:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mori.io</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">IOEngine</span><span class="p">,</span> <span class="n">IOEngineSession</span><span class="p">,</span> <span class="n">IOEngineConfig</span><span class="p">,</span>
-    <span class="n">BackendType</span><span class="p">,</span> <span class="n">MemoryLocationType</span><span class="p">,</span> <span class="n">StatusCode</span><span class="p">,</span> <span class="n">PollCqMode</span><span class="p">,</span>
-    <span class="n">RdmaBackendConfig</span><span class="p">,</span> <span class="n">XgmiBackendConfig</span><span class="p">,</span>
-    <span class="n">EngineDesc</span><span class="p">,</span> <span class="n">MemoryDesc</span><span class="p">,</span>
-    <span class="n">set_log_level</span><span class="p">,</span>
-<span class="p">)</span>
+<section id="reproducing-the-end-to-end-numbers">
+<h2>Reproducing the end-to-end numbers<a class="headerlink" href="#reproducing-the-end-to-end-numbers" title="Link to this heading"></a></h2>
+<p>The SGLang numbers need the integration branch and a mori built with
+<code class="docutils literal notranslate"><span class="pre">BUILD_CCO_SDMA=ON</span></code> on <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MORI_ENABLE_SDMA</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">MORI_SOCKET_IFNAME</span><span class="o">=</span>lo
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/path/to/mori-with-sdma
+<span class="nb">export</span><span class="w"> </span><span class="nv">SGLANG_OPT_FUSED_WO_B_AR</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SGLANG_OPT_FUSED_WO_B_AR_FP8_GATHER</span><span class="o">=</span><span class="m">1</span><span class="w">     </span><span class="c1"># optional, the fp8 wire</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SGLANG_OPT_MORI_MXFP8_GEMM</span><span class="o">=</span><span class="m">1</span><span class="w">              </span><span class="c1"># optional, the GEMM alone</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SGLANG_DEBUG_FUSED_WO_B_AR</span><span class="o">=</span><span class="m">1</span><span class="w">              </span><span class="c1"># optional, logs per-layer relL2</span>
+
+sglang<span class="w"> </span>serve<span class="w"> </span>--model-path<span class="w"> </span>&lt;DeepSeek-V4-Pro&gt;<span class="w"> </span>--tp<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--attention-backend<span class="w"> </span>dsv4<span class="w"> </span>--page-size<span class="w"> </span><span class="m">256</span><span class="w"> </span>--chunked-prefill-size<span class="w"> </span><span class="m">16384</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--mem-fraction-static<span class="w"> </span><span class="m">0</span>.88<span class="w"> </span>--kv-cache-dtype<span class="w"> </span>fp8_e4m3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--enforce-shared-experts-fusion
 </pre></div>
 </div>
-<p><strong>Core classes:</strong></p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Class</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IOEngine</span></code></p></td>
-<td><p>Primary engine for P2P transfers — create backends, register engines/memory, issue transfers</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IOEngineSession</span></code></p></td>
-<td><p>Lightweight reusable session between two memory regions, lower per-transfer overhead</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IOEngineConfig</span></code></p></td>
-<td><p>Engine configuration: <code class="docutils literal notranslate"><span class="pre">host</span></code> (str), <code class="docutils literal notranslate"><span class="pre">port</span></code> (int)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig</span></code></p></td>
-<td><p>RDMA backend config: <code class="docutils literal notranslate"><span class="pre">qp_per_transfer</span></code>, <code class="docutils literal notranslate"><span class="pre">post_batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_worker_threads</span></code>, <code class="docutils literal notranslate"><span class="pre">poll_cq_mode</span></code>, <code class="docutils literal notranslate"><span class="pre">enable_notification</span></code>, <code class="docutils literal notranslate"><span class="pre">enable_transfer_chunking</span></code>, <code class="docutils literal notranslate"><span class="pre">chunk_bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">max_chunks_per_transfer</span></code>, <code class="docutils literal notranslate"><span class="pre">num_nics_per_transfer</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">XgmiBackendConfig</span></code></p></td>
-<td><p>XGMI backend config: <code class="docutils literal notranslate"><span class="pre">num_streams</span></code> (default 64), <code class="docutils literal notranslate"><span class="pre">num_events</span></code> (default 64)</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Enums:</strong></p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Enum</p></th>
-<th class="head"><p>Values</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BackendType</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Unknown</span></code>, <code class="docutils literal notranslate"><span class="pre">XGMI</span></code>, <code class="docutils literal notranslate"><span class="pre">RDMA</span></code>, <code class="docutils literal notranslate"><span class="pre">TCP</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MemoryLocationType</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Unknown</span></code>, <code class="docutils literal notranslate"><span class="pre">CPU</span></code>, <code class="docutils literal notranslate"><span class="pre">GPU</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">StatusCode</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code>, <code class="docutils literal notranslate"><span class="pre">INIT</span></code>, <code class="docutils literal notranslate"><span class="pre">IN_PROGRESS</span></code>, <code class="docutils literal notranslate"><span class="pre">ERR_INVALID_ARGS</span></code>, <code class="docutils literal notranslate"><span class="pre">ERR_NOT_FOUND</span></code>, <code class="docutils literal notranslate"><span class="pre">ERR_RDMA_OP</span></code>, <code class="docutils literal notranslate"><span class="pre">ERR_BAD_STATE</span></code>, <code class="docutils literal notranslate"><span class="pre">ERR_GPU_OP</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PollCqMode</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">POLLING</span></code>, <code class="docutils literal notranslate"><span class="pre">EVENT</span></code></p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>IOEngine methods:</strong></p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get_engine_desc()</span></code></p></td>
-<td><p>Get engine descriptor for remote registration</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">create_backend(type,</span> <span class="pre">config)</span></code></p></td>
-<td><p>Create RDMA/XGMI/TCP backend</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">remove_backend(type)</span></code></p></td>
-<td><p>Remove a backend</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">register_remote_engine(desc)</span></code></p></td>
-<td><p>Register a remote engine</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">deregister_remote_engine(desc)</span></code></p></td>
-<td><p>Deregister a remote engine</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">register_memory(ptr,</span> <span class="pre">size,</span> <span class="pre">device_id,</span> <span class="pre">mem_loc)</span></code></p></td>
-<td><p>Register memory by raw pointer</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">register_torch_tensor(tensor)</span></code></p></td>
-<td><p>Register a PyTorch tensor</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">deregister_memory(mem_desc)</span></code></p></td>
-<td><p>Deregister memory</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">allocate_transfer_uid()</span></code></p></td>
-<td><p>Allocate unique transfer ID</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">read(local_mem,</span> <span class="pre">l_offset,</span> <span class="pre">remote_mem,</span> <span class="pre">r_offset,</span> <span class="pre">size,</span> <span class="pre">uid)</span></code></p></td>
-<td><p>One-sided read (remote → local)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">write(local_mem,</span> <span class="pre">l_offset,</span> <span class="pre">remote_mem,</span> <span class="pre">r_offset,</span> <span class="pre">size,</span> <span class="pre">uid)</span></code></p></td>
-<td><p>One-sided write (local → remote)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">batch_read(...)</span></code> / <code class="docutils literal notranslate"><span class="pre">batch_write(...)</span></code></p></td>
-<td><p>Batched transfers</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">create_session(local_mem,</span> <span class="pre">remote_mem)</span></code></p></td>
-<td><p>Create reusable session</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pop_inbound_transfer_status(key,</span> <span class="pre">uid)</span></code></p></td>
-<td><p>Check inbound transfer status</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>TransferStatus methods:</strong></p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InProgress()</span></code></p></td>
-<td><p>Transfer still in progress</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Succeeded()</span></code></p></td>
-<td><p>Transfer completed successfully</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Failed()</span></code></p></td>
-<td><p>Transfer failed</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Code()</span></code></p></td>
-<td><p>Get status code</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Message()</span></code></p></td>
-<td><p>Get status message</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Wait()</span></code></p></td>
-<td><p>Block until transfer completes</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="example-basic-read-write">
-<h2>Example: Basic Read/Write<a class="headerlink" href="#example-basic-read-write" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mori.io</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">IOEngine</span><span class="p">,</span> <span class="n">IOEngineConfig</span><span class="p">,</span> <span class="n">BackendType</span><span class="p">,</span>
-    <span class="n">RdmaBackendConfig</span><span class="p">,</span> <span class="n">EngineDesc</span><span class="p">,</span>
-<span class="p">)</span>
+<p>V4.1-Flash is the verified MI350X low-latency cell plus mori’s variables, at
+TP4. <code class="docutils literal notranslate"><span class="pre">AITER_BF16_FP8_MOE_BOUND=0</span></code> is load-bearing and is <em>not</em> part of the
+published cell: the checkpoint has <code class="docutils literal notranslate"><span class="pre">swiglu_limit=10.0</span></code>, so its MoE takes AITER’s
+clamped-SwiGLU INTERLEAVE path, where no <code class="docutils literal notranslate"><span class="pre">ck_moe_stage1</span></code> kernel exists for
+(bf16 activation x fp4 weight) – every M below the default bound of 256, which
+is every decode step, raises “Unsupported kernel config for moe heuristic
+dispatch”.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SGLANG_USE_AITER</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">SGLANG_MOE_PADDING</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">AITER_FLYDSL_FORCE_REDUCE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">ROCM_QUICK_REDUCE_QUANTIZATION</span><span class="o">=</span>NONE
+<span class="nb">export</span><span class="w"> </span><span class="nv">AITER_BF16_FP8_MOE_BOUND</span><span class="o">=</span><span class="m">0</span>
 
-<span class="c1"># Create engines on initiator and target</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">IOEngineConfig</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
-<span class="n">initiator</span> <span class="o">=</span> <span class="n">IOEngine</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"initiator"</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-<span class="n">config</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">8081</span>
-<span class="n">target</span> <span class="o">=</span> <span class="n">IOEngine</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"target"</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-<span class="c1"># Create RDMA backends</span>
-<span class="n">rdma_config</span> <span class="o">=</span> <span class="n">RdmaBackendConfig</span><span class="p">(</span><span class="n">qp_per_transfer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">initiator</span><span class="o">.</span><span class="n">create_backend</span><span class="p">(</span><span class="n">BackendType</span><span class="o">.</span><span class="n">RDMA</span><span class="p">,</span> <span class="n">rdma_config</span><span class="p">)</span>
-<span class="n">target</span><span class="o">.</span><span class="n">create_backend</span><span class="p">(</span><span class="n">BackendType</span><span class="o">.</span><span class="n">RDMA</span><span class="p">,</span> <span class="n">rdma_config</span><span class="p">)</span>
-
-<span class="c1"># Exchange and register engine descriptors</span>
-<span class="n">initiator_desc</span> <span class="o">=</span> <span class="n">initiator</span><span class="o">.</span><span class="n">get_engine_desc</span><span class="p">()</span>
-<span class="n">target_desc</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">get_engine_desc</span><span class="p">()</span>
-<span class="n">initiator</span><span class="o">.</span><span class="n">register_remote_engine</span><span class="p">(</span><span class="n">target_desc</span><span class="p">)</span>
-<span class="n">target</span><span class="o">.</span><span class="n">register_remote_engine</span><span class="p">(</span><span class="n">initiator_desc</span><span class="p">)</span>
-
-<span class="c1"># Register GPU tensors</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 1 MB</span>
-<span class="n">src_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span><span class="p">,),</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cuda:0"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-<span class="n">dst_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cuda:1"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-<span class="n">initiator_mem</span> <span class="o">=</span> <span class="n">initiator</span><span class="o">.</span><span class="n">register_torch_tensor</span><span class="p">(</span><span class="n">dst_tensor</span><span class="p">)</span>
-<span class="n">target_mem</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">register_torch_tensor</span><span class="p">(</span><span class="n">src_tensor</span><span class="p">)</span>
-
-<span class="c1"># Read: copy from target (remote) to initiator (local)</span>
-<span class="n">uid</span> <span class="o">=</span> <span class="n">initiator</span><span class="o">.</span><span class="n">allocate_transfer_uid</span><span class="p">()</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">initiator</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">initiator_mem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target_mem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">uid</span><span class="p">)</span>
-
-<span class="c1"># Wait for completion</span>
-<span class="k">while</span> <span class="n">status</span><span class="o">.</span><span class="n">InProgress</span><span class="p">():</span>
-    <span class="k">pass</span>
-<span class="k">assert</span> <span class="n">status</span><span class="o">.</span><span class="n">Succeeded</span><span class="p">()</span>
-
-<span class="c1"># With sessions (lower overhead for repeated transfers)</span>
-<span class="n">sess</span> <span class="o">=</span> <span class="n">initiator</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">initiator_mem</span><span class="p">,</span> <span class="n">target_mem</span><span class="p">)</span>
-<span class="n">uid</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">allocate_transfer_uid</span><span class="p">()</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">uid</span><span class="p">)</span>
-<span class="k">while</span> <span class="n">status</span><span class="o">.</span><span class="n">InProgress</span><span class="p">():</span>
-    <span class="k">pass</span>
+sglang<span class="w"> </span>serve<span class="w"> </span>--model-path<span class="w"> </span>&lt;DeepSeek-V4.1-Flash&gt;<span class="w"> </span>--tp<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ep-size<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disable-radix-cache<span class="w"> </span>--mem-fraction-static<span class="w"> </span><span class="m">0</span>.78<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--chunked-prefill-size<span class="w"> </span><span class="m">16384</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--speculative-algorithm<span class="w"> </span>DSPARK<span class="w"> </span>--speculative-dspark-block-size<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cuda-graph-max-bs<span class="w"> </span><span class="m">64</span><span class="w"> </span>--cuda-graph-backend-prefill<span class="w"> </span>breakable<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cuda-graph-max-bs-prefill<span class="w"> </span><span class="m">4096</span>
 </pre></div>
 </div>
-<p>See <code class="docutils literal notranslate"><span class="pre">examples/io/example.py</span></code> for more complete examples including batch transfers.</p>
-</section>
-<section id="environment-configuration">
-<h2>Environment &amp; Configuration<a class="headerlink" href="#environment-configuration" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Setting</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_log_level(level)</span></code></p></td>
-<td><p>Set MORI-IO log verbosity level</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.qp_per_transfer</span></code></p></td>
-<td><p>Queue pairs per transfer (default 1, increase for higher bandwidth; with multi-NIC these QPs are spread across NICs, so aim for ≥2 QP per NIC). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_QP_PER_TRANSFER</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.poll_cq_mode</span></code></p></td>
-<td><p>CQ polling mode: <code class="docutils literal notranslate"><span class="pre">POLLING</span></code> (busy-wait, lower latency) or <code class="docutils literal notranslate"><span class="pre">EVENT</span></code> (interrupt-driven). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_POLL_CQ_MODE</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code>/<code class="docutils literal notranslate"><span class="pre">polling</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>/<code class="docutils literal notranslate"><span class="pre">event</span></code>)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.post_batch_size</span></code></p></td>
-<td><p>WRs per <code class="docutils literal notranslate"><span class="pre">ibv_post_send</span></code> chain (default <code class="docutils literal notranslate"><span class="pre">-1</span></code> = auto). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_POST_BATCH_SIZE</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.num_worker_threads</span></code></p></td>
-<td><p>Worker threads for batch posting (default <code class="docutils literal notranslate"><span class="pre">1</span></code>; ignored when chunking / multi-NIC forces inline posting). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_NUM_WORKER_THREADS</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.enable_notification</span></code></p></td>
-<td><p>Enable target-side completion notifications (default <code class="docutils literal notranslate"><span class="pre">True</span></code>). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_ENABLE_NOTIFICATION</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.enable_transfer_chunking</span></code></p></td>
-<td><p>Split a large single transfer into <code class="docutils literal notranslate"><span class="pre">chunk_bytes</span></code> chunks pipelined across QPs (default <code class="docutils literal notranslate"><span class="pre">False</span></code>). Lifts single-transfer bandwidth from single-outstanding (~28 GB/s) to NIC line rate. Forces single-thread inline posting (ignores <code class="docutils literal notranslate"><span class="pre">num_worker_threads</span></code>). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_ENABLE_CHUNKING</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.chunk_bytes</span></code></p></td>
-<td><p>Chunk size when chunking is on (default <code class="docutils literal notranslate"><span class="pre">65536</span></code> = 64 KB). Messages ≤ this are unchanged. Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_CHUNK_BYTES</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.max_chunks_per_transfer</span></code></p></td>
-<td><p>Cap on chunks per transfer to bound WR/SQ usage (default <code class="docutils literal notranslate"><span class="pre">64</span></code>). Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_MAX_CHUNKS</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RdmaBackendConfig.num_nics_per_transfer</span></code></p></td>
-<td><p>Stripe a transfer across this many NICs (default <code class="docutils literal notranslate"><span class="pre">1</span></code>). Adaptive by memory type: GPU memory stays single-NIC (PCIe-bound); host memory stripes across NUMA-local NICs. Env: <code class="docutils literal notranslate"><span class="pre">MORI_IO_NUM_NICS_PER_TRANSFER</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IOEngineConfig.port</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
-<td><p>Auto-bind to a free port</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code></p></td>
-<td><p>MORI-IO loads libibverbs dynamically at runtime (<code class="docutils literal notranslate"><span class="pre">dlopen</span></code> of <code class="docutils literal notranslate"><span class="pre">libibverbs.so</span></code> / <code class="docutils literal notranslate"><span class="pre">libibverbs.so.1</span></code>) rather than linking it. To use an out-of-tree libibverbs, put its directory on <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code>.</p></td>
-</tr>
-</tbody>
-</table>
-<p>UMBP (the upper-layer cache pool) exposes a separate set of runtime-tunable
-env vars for distributed master / pool client / SPDK proxy timing. Those are
-out of scope for MORI-IO; see <a class="reference external" href="https://github.com/ROCm/mori/blob/main/src/umbp/doc/runtime-env-vars.md"><code class="docutils literal notranslate"><span class="pre">src/umbp/doc/runtime-env-vars.md</span></code></a>.</p>
-</section>
-<section id="profiling-mori-io-with-roctx-markers">
-<h2>Profiling MORI-IO with ROCTX Markers<a class="headerlink" href="#profiling-mori-io-with-roctx-markers" title="Link to this heading"></a></h2>
-<p>MORI-IO provides optional, runtime-gated ROCTX timeline markers for use with
-<code class="docutils literal notranslate"><span class="pre">rocprofv3</span> <span class="pre">--marker-trace</span></code>. The following variables are disabled by default and
-operate independently:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MORI_ROCTX</span></code> enables same-thread host submission ranges around MORI-IO
-batch-write dispatch and RDMA posting paths. They measure host-side submission
-and post work only, not completion latency.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MORI_ROCTX_TRANSFER</span></code> enables process-wide ranges that begin immediately
-before posting a signaled RDMA work request and end on the CQ polling thread
-after its CQE is observed. They measure post-to-completion latency.</p></li>
-</ul>
-<p>Marker fields <code class="docutils literal notranslate"><span class="pre">bytes=</span></code> and <code class="docutils literal notranslate"><span class="pre">id=</span></code> identify application payload bytes (not
-physical RoCE wire bytes) and MORI’s logical transfer ID, respectively. Key host
-marker families are <code class="docutils literal notranslate"><span class="pre">mori.io.*</span></code> and <code class="docutils literal notranslate"><span class="pre">mori.rdma.batch_post.*</span></code>; transfer markers
-use <code class="docutils literal notranslate"><span class="pre">mori.rdma.io_transfer[.read]</span></code>.</p>
-<p>Although generic to MORI-IO, these markers can help observe KV-cache
-post-to-completion latency in prefill/decode-disaggregated vLLM or SGLang
-deployments configured to use MORI-IO.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MORI_ROCTX</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">MORI_ROCTX_TRANSFER</span><span class="o">=</span><span class="m">1</span>
-rocprofv3<span class="w"> </span>--marker-trace<span class="w"> </span>--<span class="w"> </span>&lt;your<span class="w"> </span>MORI<span class="w"> </span>command&gt;
+<p><code class="docutils literal notranslate"><span class="pre">--chunked-prefill-size</span></code> has to be at least the wire’s floor or no prefill chunk
+ever reaches it and the fused variants quietly measure the base path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--mem-fraction-static</span></code> has to leave room for the symmetric window, which is VMM
+memory <strong>outside</strong> torch’s allocator: 700 MiB on V4-Pro’s bf16 wire and 812 MiB
+on fp8, which needs the extra staging region; 163 MiB at V4.1-Flash’s TP4 shape
+with <code class="docutils literal notranslate"><span class="pre">m_max=5120</span></code>.</p>
+<p>The capture protocol matters more than it looks. Profile a <em>different</em> prompt
+than the one used to warm up, <code class="docutils literal notranslate"><span class="pre">flush_cache</span></code> between them, and compare the same
+request on both sides – an earlier A/B without those controls reported a <strong>+8.3%
+regression</strong> that did not exist.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">warm</span> <span class="o">=</span> <span class="s2">"Pack my box with five dozen liquor jugs. "</span> <span class="o">*</span> <span class="mi">2800</span>
+<span class="n">main</span> <span class="o">=</span> <span class="s2">"The quick brown fox jumps over the lazy dog. "</span> <span class="o">*</span> <span class="mi">2800</span>
+<span class="n">gen</span><span class="p">(</span><span class="n">warm</span><span class="p">);</span> <span class="n">post</span><span class="p">(</span><span class="s2">"/flush_cache"</span><span class="p">);</span> <span class="n">post</span><span class="p">(</span><span class="s2">"/start_profile"</span><span class="p">)</span>
+<span class="n">gen</span><span class="p">(</span><span class="n">main</span><span class="p">);</span> <span class="n">post</span><span class="p">(</span><span class="s2">"/stop_profile"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Either variable can be enabled alone. Enabled values include <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">on</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">true</span></code>; disable a variable by unsetting it or setting it to <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">off</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
-</section>
-<section id="source-files">
-<h2>Source Files<a class="headerlink" href="#source-files" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>File</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">python/mori/io/__init__.py</span></code></p></td>
-<td><p>Public exports</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">python/mori/io/engine.py</span></code></p></td>
-<td><p>Python IOEngine and IOEngineSession classes</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src/pybind/pybind.cpp</span></code></p></td>
-<td><p>Python module entry point</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src/pybind/mori.cpp</span></code></p></td>
-<td><p>IO binding registration (<code class="docutils literal notranslate"><span class="pre">RegisterMoriIo</span></code>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">examples/io/example.py</span></code></p></td>
-<td><p>Complete usage examples (read, write, batch, session)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tests/python/io/test_engine.py</span></code></p></td>
-<td><p>Comprehensive test suite</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tests/cpp/io/bench_engine.cpp</span></code></p></td>
-<td><p>Performance benchmark (default, nixlbench-matching)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tests/python/io/benchmark.py</span></code></p></td>
-<td><p>Performance benchmark (Python, kept for parity)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docs/MORI-IO-BENCHMARK.md</span></code></p></td>
-<td><p>Benchmark commands and results</p></td>
-</tr>
-</tbody>
-</table>
 </section>
 </section>
 
@@ -903,8 +884,8 @@ rocprofv3<span class="w"> </span>--marker-trace<span class="w"> </span>--<span c
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="MORI-IR-GUIDE.html" class="btn btn-neutral float-left" title="MORI-IR Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="MORI-UMBP-SINGLE-NODE-GUIDE.html" class="btn btn-neutral float-right" title="MORI UMBP Single-Node Smoke Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="MORI-EP-BENCHMARK.html" class="btn btn-neutral float-left" title="MORI-EP Benchmark" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MORI-IO-BENCHMARK.html" class="btn btn-neutral float-right" title="MORI-IO Benchmark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
